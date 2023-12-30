@@ -37,6 +37,7 @@ public class TeeTimeController {
 //        return teeTimeRepository.findAllByDate(date);
 //    }
 
+    @SuppressWarnings("UseBulkOperation")
     @GetMapping(value="/{date}")
     public List<TeeTimeModel> getTeeTimesForDay2(@PathVariable String date) throws FileNotFoundException {
 
