@@ -12,7 +12,7 @@ import java.util.List;
 @RestController
 @RequestMapping(value="/api/teetime")
 public class TeeTimeController {
-    private TeeTimeRepository teeTimeRepository;
+    private final TeeTimeRepository teeTimeRepository;
     @Autowired
     public TeeTimeController(TeeTimeRepository teeTimeRepository) {
         this.teeTimeRepository = teeTimeRepository;
@@ -56,6 +56,11 @@ public class TeeTimeController {
         return "Tee time added!";
     }
 
+    /*
+     * Endpoint to update the amount of spots left in the TeeTime.
+     * Uses @RequestParam for the date, time, and newSpots variables.
+     * If there are no new spots left for the specific time, then the method also updates "fullyBooked" field to true.
+     */
     @PutMapping("/updateSpots")
     public String updateAvailableSpots(
             @RequestParam String date,

@@ -3,8 +3,6 @@ package com.example.fasttee.models;
 import org.springframework.data.mongodb.core.mapping.Document;
 import org.springframework.data.mongodb.core.mapping.MongoId;
 
-import java.time.format.DateTimeFormatter;
-
 @Document(collection = "tee_time_collection")
 public class TeeTimeModel {
 
@@ -42,16 +40,10 @@ public class TeeTimeModel {
         return date;
     }
 
-    public void setDate(String date) {
-        this.date = date;
-    }
+
 
     public String getTime() {
         return time;
-    }
-
-    public void setTime(String time) {
-        this.time = time;
     }
 
     @Override
@@ -59,11 +51,4 @@ public class TeeTimeModel {
         return "{\n\tdate: " + getDate() + "\n\ttime: " + getTime() + "\n\tfullyBooked: " + isFullyBooked() + "\n\tavailableSpots: " + getAvailableSpots() + "\n}";
     }
 
-    public String getId() {
-        return id;
-    }
-
-    public void setId(String id) {
-        this.id = id;
-    }
 }
