@@ -8,8 +8,8 @@ public class TeeTimeModel {
 
     @MongoId
     private String id;
-    private String date;
-    private String time;
+    private final String date;
+    private final String time;
     private boolean fullyBooked;
     private int availableSpots;
 

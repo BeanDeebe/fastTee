@@ -70,9 +70,8 @@ public class TeeTimeController {
         TeeTimeModel ttm = teeTimeRepository.findByDateAndTime(date, time);
 
         ttm.setAvailableSpots(newSpots);
-        if (newSpots == 0){
-            ttm.setFullyBooked(true);
-        }
+        ttm.setFullyBooked(newSpots == 0);
+
         teeTimeRepository.save(ttm);
 
 
