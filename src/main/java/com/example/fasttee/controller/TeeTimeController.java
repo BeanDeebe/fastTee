@@ -3,10 +3,13 @@
  */
 package com.example.fasttee.controller;
 
+import com.example.fasttee.helpers.GenerateTeeTimes;
 import com.example.fasttee.models.TeeTimeModel;
 import com.example.fasttee.repositories.TeeTimeRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
+
+import java.io.FileNotFoundException;
 import java.util.List;
 
 @RestController
@@ -29,9 +32,23 @@ public class TeeTimeController {
      * Endpoint to retrieve TeeTimes for a specific date.
      * Uses @PathVariable to extract the date from the URL.
      */
-    @GetMapping(value = "/{date}")
-    public List<TeeTimeModel> getTeeTimesForDay(@PathVariable String date) {
-        return teeTimeRepository.findAllByDate(date);
+//    @GetMapping(value = "/{date}")
+//    public List<TeeTimeModel> getTeeTimesForDay(@PathVariable String date) {
+//        return teeTimeRepository.findAllByDate(date);
+//    }
+
+    @GetMapping(value="/{date}")
+    public List<TeeTimeModel> getTeeTimesForDay2(@PathVariable String date) throws FileNotFoundException {
+
+        if (teeTimeRepository.existsByDate(date)) {
+            return teeTimeRepository.findAllByDate(date);
+        } else {
+            List<TeeTimeModel> newTeeSheet = new GenerateTeeTimes(date).generate();
+            for (TeeTimeModel time : newTeeSheet) {
+                teeTimeRepository.save(time);
+            }
+            return newTeeSheet;
+        }
     }
 
     /*
@@ -73,7 +90,6 @@ public class TeeTimeController {
         ttm.setFullyBooked(newSpots == 0);
 
         teeTimeRepository.save(ttm);
-
 
         return "Updated " + date + " " + time + " tee time. There are now " + newSpots + " spots available for booking.";
 
