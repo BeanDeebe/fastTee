@@ -12,4 +12,6 @@ public interface TeeTimeRepository extends MongoRepository<TeeTimeModel, String>
     TeeTimeModel findByDateAndTime(String date, String time);
 
     boolean existsByDate(String date);
+
+    TeeTimeModel findTTById(String id);
 }

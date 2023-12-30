@@ -51,4 +51,8 @@ public class TeeTimeModel {
         return "{\n\tdate: " + getDate() + "\n\ttime: " + getTime() + "\n\tfullyBooked: " + isFullyBooked() + "\n\tavailableSpots: " + getAvailableSpots() + "\n}";
     }
 
+    public String getId() {
+        return id;
+    }
+
 }

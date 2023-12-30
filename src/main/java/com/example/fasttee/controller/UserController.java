@@ -1,19 +1,26 @@
 package com.example.fasttee.controller;
+
+import com.example.fasttee.models.TeeTimeModel;
 import com.example.fasttee.models.UserModel;
+import com.example.fasttee.repositories.TeeTimeRepository;
 import com.example.fasttee.repositories.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @RestController
 @RequestMapping(value="/api/user")
 public class UserController {
-    private UserRepository userRepository;
+    private final UserRepository userRepository;
+    private final TeeTimeRepository teeTimeRepository;
+
     @Autowired
-    public UserController(UserRepository userRepository) {
+    public UserController(UserRepository userRepository, TeeTimeRepository teeTimeRepository) {
         this.userRepository = userRepository;
 
+        this.teeTimeRepository = teeTimeRepository;
     }
 
     @PostMapping(value = "/add")
@@ -22,20 +29,44 @@ public class UserController {
         return "User created!";
     }
 
+    @PostMapping(value = "/{id}/bookTeeTime")
+    public String bookTeeTime(@RequestParam String tid,
+                              @PathVariable String id,
+                              @RequestParam String players) {
+        ArrayList<String> details = new ArrayList<>();
+        TeeTimeModel teeTime = teeTimeRepository.findTTById(tid);
+        UserModel currUser = userRepository.findUserById(id);
+        int spotsLeft = 4 - Integer.parseInt(players);
+        details.add(teeTime.getId());
+        details.add(teeTime.getDate());
+        details.add(teeTime.getTime());
+        details.add(players);
+
+        currUser.addTeeTime(details);
+
+        teeTime.setAvailableSpots(spotsLeft);
+        teeTime.setFullyBooked(spotsLeft == 0);
+        teeTimeRepository.save(teeTime);
+        userRepository.save(currUser);
+
+        return "Successfully booked tee time!";
+
+    }
+
     @GetMapping(value = "/all")
     public List<UserModel> getAllUsers() {
         return userRepository.findAll();
     }
 
-    @GetMapping(value = "/{email}")
-    public UserModel getUser(@PathVariable String email) {
-        UserModel user = userRepository.findByEmail(email);
-        return user;
+    @GetMapping(value="/id/{id}")
+    public UserModel getUserById(@PathVariable String id) {
+        return userRepository.findUserById(id);
+
     }
 
-    @DeleteMapping("/delete/{email}")
-    public String deleteUser(@PathVariable String email) {
-        userRepository.deleteByEmail(email);
+    @DeleteMapping("/delete/{id}")
+    public String deleteUser(@PathVariable String id) {
+        userRepository.deleteUserById(id);
         return "Deleted successfully";
     }
 

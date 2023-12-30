@@ -1,20 +1,21 @@
 package com.example.fasttee.models;
 
-import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
-import org.springframework.data.mongodb.core.mapping.FieldType;
 import org.springframework.data.mongodb.core.mapping.MongoId;
+
+import java.util.ArrayList;
 
 
 @Document (collection = "user_collection")
 public class UserModel {
 
-    @MongoId(value = FieldType.OBJECT_ID)
-    private String Id;
+    @MongoId
+    private String id;
     private String firstName;
     private String lastName;
     private String email;
     private String password;
+    private ArrayList<ArrayList<String>> bookedTeeTimes;
     public UserModel(){}
 
     public UserModel(String firstName, String lastName, String email, String password) {
@@ -22,6 +23,10 @@ public class UserModel {
         this.lastName = lastName;
         this.email = email;
         this.password = password;
+        this.bookedTeeTimes = new ArrayList<>();
+    }
+    public void addTeeTime(ArrayList<String> teeTimeDetails) {
+        bookedTeeTimes.add(teeTimeDetails);
     }
 
     public String getFirstName() {
@@ -58,5 +63,13 @@ public class UserModel {
     @Override
     public String toString() {
         return "{\n\tfirstName: " + firstName + ",\n\tlastName: " + lastName + "\n}";
+    }
+
+    public ArrayList<ArrayList<String>> getBookedTeeTimes() {
+        return bookedTeeTimes;
+    }
+
+    public void setBookedTeeTimes(ArrayList<ArrayList<String>> bookedTeeTimes) {
+        this.bookedTeeTimes = bookedTeeTimes;
     }
 }
