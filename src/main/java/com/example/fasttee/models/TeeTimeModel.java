@@ -48,4 +48,9 @@ public class TeeTimeModel {
     public void setTime(String time) {
         this.time = time;
     }
+
+    @Override
+    public String toString(){
+        return "{\n\tdate: " + getDate() + "\n\ttime: " + getTime() + "\n\tfullyBooked: " + isFullyBooked() + "\n\tavailableSpots: " + getAvailableSpots() + "\n}";
+    }
 }

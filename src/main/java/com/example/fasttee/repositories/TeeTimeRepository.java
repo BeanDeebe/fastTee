@@ -8,6 +8,6 @@ import java.util.List;
 
 @Repository
 public interface TeeTimeRepository extends MongoRepository<TeeTimeModel, String> {
-
     List<TeeTimeModel> findAllByDate(String date);
+    TeeTimeModel findByDateAndTime(String date, String time);
 }
