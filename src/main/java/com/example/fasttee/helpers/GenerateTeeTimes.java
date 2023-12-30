@@ -10,8 +10,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class GenerateTeeTimes {
-    private String date;
-    private String filepath = "src/main/java/com/example/fasttee/helpers/times.txt";
+    private final String date;
 
     public GenerateTeeTimes(String date) {
        this.date = date;
@@ -20,6 +19,7 @@ public class GenerateTeeTimes {
     public List<TeeTimeModel> generate() throws FileNotFoundException {
         TeeTimeModel teeTime;
         List<TeeTimeModel> times = new ArrayList<>();
+        String filepath = "src/main/java/com/example/fasttee/helpers/times.txt";
         BufferedReader reader = new BufferedReader(new FileReader(filepath));
 
         try {
