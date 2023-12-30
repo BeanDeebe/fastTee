@@ -55,4 +55,24 @@ public class TeeTimeController {
         teeTimeRepository.save(teeTimeModel);
         return "Tee time added!";
     }
+
+    @PutMapping("/updateSpots")
+    public String updateAvailableSpots(
+            @RequestParam String date,
+            @RequestParam String time,
+            @RequestParam int newSpots
+    ) {
+        TeeTimeModel ttm = teeTimeRepository.findByDateAndTime(date, time);
+
+        ttm.setAvailableSpots(newSpots);
+        if (newSpots == 0){
+            ttm.setFullyBooked(true);
+        }
+        teeTimeRepository.save(ttm);
+
+
+        return "Updated " + date + " " + time + " tee time. There are now " + newSpots + " spots available for booking.";
+
+    }
+
 }

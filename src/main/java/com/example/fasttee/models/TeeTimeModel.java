@@ -1,10 +1,15 @@
 package com.example.fasttee.models;
 
 import org.springframework.data.mongodb.core.mapping.Document;
+import org.springframework.data.mongodb.core.mapping.MongoId;
+
 import java.time.format.DateTimeFormatter;
 
 @Document(collection = "tee_time_collection")
 public class TeeTimeModel {
+
+    @MongoId
+    private String id;
     private String date;
     private String time;
     private boolean fullyBooked;
@@ -52,5 +57,13 @@ public class TeeTimeModel {
     @Override
     public String toString(){
         return "{\n\tdate: " + getDate() + "\n\ttime: " + getTime() + "\n\tfullyBooked: " + isFullyBooked() + "\n\tavailableSpots: " + getAvailableSpots() + "\n}";
+    }
+
+    public String getId() {
+        return id;
+    }
+
+    public void setId(String id) {
+        this.id = id;
     }
 }
