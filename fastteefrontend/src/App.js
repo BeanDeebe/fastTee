@@ -1,8 +1,9 @@
-import "./App.css";
+import Welcome from "./Pages/Welcome/Welcome";
+
 function App() {
   return (
       <div>
-        <h1>Hello World</h1>
+        <Welcome />
       </div>
  );
 }
