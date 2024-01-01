@@ -1,31 +1,20 @@
-import React from "react";
+import React, {useEffect} from "react";
 import useForm from "../../hooks/UseForm";
-import {Link} from "react-router-dom";
-import Welcome from "../Welcome/Welcome";
+import {useNavigate} from "react-router-dom";
 
 export default function SignUp() {
 
-    const {handleSubmit, status, message} = useForm({});
+    const navigate = useNavigate();
+    const {handleSubmit, status} = useForm();
 
-    if (status === 'error') {
-        console.log(message);
-        console.log(status);
-        return (
-            <div>
-                <Link to='/' component={<Welcome />} />
-            </div>
-        )
-    }
+    useEffect(() => {
 
-    if (status === 'success') {
-        console.log(message);
-        console.log('status', status);
-        return (
-            <div>
-                <Link to='/' component={<Welcome />} />
-            </div>
-        )
-    }
+        if (status !== '') {
+            alert('User created!');
+            navigate('/');
+        }
+    }, [navigate, status])
+
     return (
         <>
             <div className="flex min-h-full flex-1 flex-col justify-center px-6 py-12 lg:px-8">
