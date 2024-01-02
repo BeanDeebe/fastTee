@@ -3,6 +3,7 @@ import React from "react";
 import {BrowserRouter, Route, Routes} from "react-router-dom";
 import Login from "./Pages/Login/Login";
 import SignUp from "./Pages/SignUp/SignUp";
+import TeeSheetView from "./Pages/TeeSheetView/TeeSheetView";
 
 function App() {
   return (
@@ -11,6 +12,7 @@ function App() {
               <Route exact path="/" element={<Welcome />} />
               <Route path="/login" element={<Login />} />
               <Route path="/signup" element={<SignUp />} />
+              <Route path="/teetimes" element={<TeeSheetView />} />
           </Routes>
       </BrowserRouter>
  );

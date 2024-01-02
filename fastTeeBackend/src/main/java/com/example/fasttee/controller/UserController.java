@@ -67,8 +67,13 @@ public class UserController {
 
     }
 
+    @GetMapping(value = "/email/{email}")
+    public UserModel getUserByEmail(@PathVariable String email) {
+        return userRepository.findUserByEmail(email);
+    }
     @DeleteMapping("/delete/{id}")
     public String deleteUser(@PathVariable String id) {
+
         userRepository.deleteUserById(id);
         return "Deleted successfully";
     }
