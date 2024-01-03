@@ -1,0 +1,25 @@
+.horizontal-pagination {
+    display: flex;
+    justify-content: center;
+    list-style: none;
+    padding: 0;
+    margin-top: 5rem;
+}
+
+.horizontal-pagination li {
+    display: inline-block;
+    margin-right: 5px;
+}
+
+.horizontal-pagination a {
+    text-decoration: none;
+    padding: 5px 10px;
+    border: 1px solid #ddd;
+    color: #333;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.horizontal-pagination a:hover {
+    background-color: #eee;
+}
