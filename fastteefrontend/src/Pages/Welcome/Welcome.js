@@ -15,12 +15,12 @@ export default function Welcome() {
                         <div className="mt-10 flex items-center justify-center gap-x-6">
                             <Link
                                 to="/signup"
-                                className="rounded-md bg-green-600 px-3.5 py-2.5 text-md font-semibold text-white shadow-sm hover:bg-green-900 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-green-600"
+                                className="rounded-md bg-emerald-600 px-3.5 py-2.5 text-xl text-white shadow-sm hover:bg-emerald-900"
                             >
                                 Sign Up
                             </Link>
                             <Link to="/login"
-                                className="rounded-md bg-white px-3.5 py-2.5 text-md font-semibold text-black focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-green-600"
+                                className="rounded-md text-xl bg-white px-3.5 py-2.5 text-gray-900 hover:text-emerald-900"
                             >
                                 Log In
                             </Link>

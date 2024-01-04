@@ -16,13 +16,13 @@ function DisplayTimes({ currentTimes }) {
             {currentTimes && currentTimes.map(time =>
                     <Card key={time.id}>
                         <List>
-                            <ListItem ripple={false} className="py-1 p-1 pr-1 m-1 outline-none focus:outline-green-500 shadow hover:shadow-none hover:outline-green-500">
+                            <ListItem ripple={false} className="py-1 p-1 pr-1 m-1 outline-none focus:bg-emerald-200 shadow hover:shadow-none hover:bg-emerald-50">
                                 <div>
                                     <p className="text-xl">{time.time}</p>
                                     <p>Openings: {time.availableSpots}</p>
                                 </div>
                                 <div className="inline-block absolute right-0">
-                                    <span><Button className="bg-green-500 rounded-lg">Book</Button></span>
+                                    <span><Button className="bg-emerald-600 hover:bg-emerald-800 rounded-2xl w-16 m-5 p-2">Book</Button></span>
                                 </div>
                             </ListItem>
                         </List>
@@ -36,7 +36,7 @@ export default function TeeSheetView() {
     const [dateState, setDateState] = useState(new Date());
     const [times, setTimes] = useState([]);
     const [currentPage, setCurrentPage] = useState(1);
-    const [timesPerPage] = useState(6);
+    const [timesPerPage] = useState(10);
 
     const date = moment(dateState).format("YYYY-MM-DD");
     const apiCall = process.env.REACT_APP_GET_TEE_TIMES + date;
@@ -81,12 +81,10 @@ export default function TeeSheetView() {
                 <div>
                 <ReactPaginate
                     className="horizontal-pagination"
-                    nextLabel=">"
                     onPageChange={handlePageClick}
                     pageRangeDisplayed={3}
-                    marginPagesDisplayed={2}
+                    marginPagesDisplayed={3}
                     pageCount={pageCount}
-                    previousLabel="<"
                     pageClassName="page-item"
                     pageLinkClassName="page-link"
                     previousClassName="page-item"
@@ -97,7 +95,6 @@ export default function TeeSheetView() {
                     breakClassName="page-item"
                     breakLinkClassName="page-link"
                     containerClassName="pagination"
-                    activeClassName="active"
                     renderOnZeroPageCount={null}
                 />
                 </div>
