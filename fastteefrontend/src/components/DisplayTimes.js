@@ -1,6 +1,6 @@
 import React, {useState} from "react";
 import {Card, List, ListItem, Button} from "@material-tailwind/react";
-import {Link, useNavigate} from "react-router-dom";
+import {useNavigate} from "react-router-dom";
 export default function DisplayTimes({ currentTimes }) {
     let [teeTimeId, setTeeTimeId] = useState('');
     const navigate = useNavigate();
@@ -8,9 +8,8 @@ export default function DisplayTimes({ currentTimes }) {
     const handleClick  = (event) => {
         teeTimeId = event.target.getAttribute('index');
         setTeeTimeId(teeTimeId);
-        console.log(teeTimeId);
-
-        navigate(`/teetimes/book/${teeTimeId}`)
+        const data = { tid : teeTimeId}
+        navigate(`/teetimes/book/`, {state: data})
     }
 
     return (
