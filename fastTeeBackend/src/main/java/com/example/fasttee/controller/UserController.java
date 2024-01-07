@@ -5,11 +5,9 @@ import com.example.fasttee.models.UserModel;
 import com.example.fasttee.repositories.TeeTimeRepository;
 import com.example.fasttee.repositories.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
-import java.util.List;
 
 @CrossOrigin("http://localhost:3000")
 @RestController
@@ -56,11 +54,6 @@ public class UserController {
 
     }
 
-    @GetMapping(value = "/all")
-    public List<UserModel> getAllUsers() {
-        return userRepository.findAll();
-    }
-
     @GetMapping(value="/id/{id}")
     public UserModel getUserById(@PathVariable String id) {
         return userRepository.findUserById(id);
@@ -71,6 +64,7 @@ public class UserController {
     public UserModel getUserByEmail(@PathVariable String email) {
         return userRepository.findUserByEmail(email);
     }
+
     @DeleteMapping("/delete/{id}")
     public String deleteUser(@PathVariable String id) {
 

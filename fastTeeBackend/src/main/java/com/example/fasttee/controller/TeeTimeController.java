@@ -20,20 +20,13 @@ public class TeeTimeController {
     public TeeTimeController(TeeTimeRepository teeTimeRepository) {
         this.teeTimeRepository = teeTimeRepository;
     }
-    /*
-     * Endpoint to retrieve all TeeTimes.
-     */
-    @GetMapping(value = "/all")
-    public List<TeeTimeModel> getTeeTimes() {
-       return teeTimeRepository.findAll();
-    }
 
     /*
      * Endpoint to retrieve TeeTimes for a specific date.
      * Uses @PathVariable to extract the date from the URL.
      */
     @GetMapping(value="/{date}")
-    public List<TeeTimeModel> getTeeTimesForDay2(@PathVariable String date) throws FileNotFoundException {
+    public List<TeeTimeModel> getTeeTimesForDay(@PathVariable String date) throws FileNotFoundException {
 
         if (teeTimeRepository.existsByDate(date)) {
             return teeTimeRepository.findAllByDate(date);
@@ -44,28 +37,6 @@ public class TeeTimeController {
             }
             return newTeeSheet;
         }
-    }
-
-    /*
-     * Endpoint to retrieve a single TeeTime for a given date and time.
-     * Uses @RequestParam to get parameters from the query string.
-     */
-    @GetMapping(value= "/getTime")
-    public TeeTimeModel getSingleTeeTime(
-            @RequestParam String date,
-            @RequestParam String time ) {
-        return teeTimeRepository.findByDateAndTime(date, time);
-
-    }
-
-    /*
-     * Endpoint to add a new TeeTime.
-     * Uses @RequestBody to map the incoming JSON to TeeTimeModel.
-     */
-    @PostMapping(value = "/add")
-    public String addSingleTime(@RequestBody TeeTimeModel teeTimeModel) {
-        teeTimeRepository.save(teeTimeModel);
-        return "Tee time added!";
     }
 
 }
