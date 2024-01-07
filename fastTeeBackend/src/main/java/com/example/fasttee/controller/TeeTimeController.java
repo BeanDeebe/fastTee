@@ -39,4 +39,9 @@ public class TeeTimeController {
         }
     }
 
+    @GetMapping(value="/id/{id}")
+    public TeeTimeModel getTeeTimeById(@PathVariable String id) {
+        return teeTimeRepository.findTTById(id);
+    }
+
 }
