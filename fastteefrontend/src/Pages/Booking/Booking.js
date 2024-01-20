@@ -1,27 +1,37 @@
 import React, {useEffect, useState} from "react";
-import {useLocation} from "react-router-dom";
-import {Button, Card, CardBody, CardFooter, CardHeader} from "@material-tailwind/react";
+import {useLocation, useNavigate} from "react-router-dom";
+import {Button, Card, CardBody, CardHeader} from "@material-tailwind/react";
 
 export default function Booking() {
 
     const location = useLocation();
     const data = location.state;
     const [singleTimeInfo, setSingleTimeInfo] = useState([]);
+    const [bookingState, setBookingState] = useState(false);
+    const navigate = useNavigate();
 
-    const apiCall = process.env.REACT_APP_GET_SINGLE_TIME + data.tid;
+
     useEffect(() => {
+        const teeTimeid = data.tid
+        const apiCall = process.env.REACT_APP_GET_SINGLE_TIME + teeTimeid;
         fetch(apiCall)
             .then((res) => res.json())
             .then((res) => {setSingleTimeInfo(res)})
             .catch((err) => console.error(err));
-    }, []);
+    }, [data]);
 
     const handleClick = (e) => {
+      // TODO -- refactor this to accept the user's id dynamically as well as 
+      // player number.
+      const bookApi = `http://localhost:8080/api/user/bookteetime?tid=${data.tid}&id=659586e7bed1f435bf7240bb&players=4`;
+      console.log(bookApi);
+      fetch(bookApi, {method: 'POST'})
+        .then((res) => {setBookingState(true)})
+        .catch((err) => console.error(err));
+      alert('tee time booked!'); 
+      navigate('/teetimes');
 
     }
-
-
-    console.log(singleTimeInfo);
 
     return (
         <div className="bg-gray-100 columns-1">

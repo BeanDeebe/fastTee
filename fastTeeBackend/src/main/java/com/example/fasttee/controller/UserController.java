@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
 
-@CrossOrigin("http://localhost:3000")
+@CrossOrigin(origins = "http://localhost:3000")
 @RestController
 @RequestMapping(value="/api/user")
 public class UserController {
@@ -30,9 +30,9 @@ public class UserController {
         return "User Created";
     }
 
-    @PostMapping(value = "/{id}/bookTeeTime")
+    @PostMapping(value = "/bookteetime")
     public String bookTeeTime(@RequestParam String tid,
-                              @PathVariable String id,
+                              @RequestParam String id,
                               @RequestParam String players) {
         ArrayList<String> details = new ArrayList<>();
         TeeTimeModel teeTime = teeTimeRepository.findTTById(tid);
